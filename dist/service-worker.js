@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.66936436fe470fb697aa56f0303bf912.js"
+  "/precache-manifest.42f317ca0d4e3bf5bfcfadc445919861.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "olsera"});

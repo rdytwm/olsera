@@ -144,3 +144,15 @@ main {
 	bottom: 20px;
 	cursor: pointer;
 }
+
+.btn-like {
+	&.active {
+		i {
+			color: red !important;
+		}
+	}
+}
+
+button {
+	cursor: pointer;
+}
