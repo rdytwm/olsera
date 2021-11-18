@@ -1,8 +1,25 @@
 <template>
-	<div id="nav">
-		<router-link to="/">Home</router-link> |
-		<router-link to="/about">About</router-link>
-	</div>
+	<NavTop/>
 
-	<router-view/>
+	<main>
+		<router-view/>
+	</main>
 </template>
+
+<script>
+// Style
+import './assets/main.scss';
+
+// Component
+import NavTop from './components/NavTop';
+
+export default {
+	name: 'App',
+	components: {
+		NavTop
+	},
+	beforeCreate() {
+		this.$store.commit('initialiseStore');
+	}
+}
+</script>
