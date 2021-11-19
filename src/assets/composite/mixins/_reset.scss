@@ -1,0 +1,28 @@
+* {
+	font-family: 'Nunito', sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+main {
+	padding-top: 70px !important;
+}
+
+.q-toolbar {
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1001;
+	// max-width: 500px;
+	margin: auto;
+}
+
+.text-subtitle2 {
+	margin-bottom: 10px !important;
+    font-weight: 700 !important;
+    font-size: 15px;
+    color: #4a4a4a !important;
+}

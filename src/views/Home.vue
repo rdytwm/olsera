@@ -1,10 +1,12 @@
 <template>
-	<h2 class="display-1">Latest Post</h2>
-
-	<div id="infinite-list" class="container">
-		<div v-for="post in posts" class="col-posts">
-			<Card :title="post.title" :description="post.body"/>
+	<div class="row">		
+		<div v-for="post in posts" class="col-12">
+			<Card :id="`${post.id}`" :title="post.title" :description="post.body"/>
 		</div>
+	</div>
+
+	<div v-if="loading" class="row justify-center q-my-md">
+		<q-spinner-dots color="primary" size="40px" />
 	</div>
 </template>
 
@@ -34,32 +36,34 @@ export default {
 		this.getNextPost();
 	},
 	beforeDestroy() {
-		// I switched the example from `destroyed` to `beforeDestroy`
-		// to exercise your mind a bit. This lifecycle method works too.
 		window.removeEventListener('scroll', this.handleDebouncedScroll);
 	},
 	methods: {
 		getPosts: async function () {
 			try {
+				this.loading = true;
 				const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_page=1&_limit=5`);
-				console.log(response);
 				this.posts = response.data;
+				this.loading = false;
 			} catch (error) {
-				console.log("get posts error", error);
+				this.loading = false;
 			}
 		},
 		getNextPost() {
 			window.onscroll = async () => {
-				let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+				this.loading = true;
+				const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
 				if (bottomOfWindow) {
 					try {
 						const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_page=${this.nextItem++}&_limit=5`);
+						this.nextItem = this.nextItem++;
 						if (Object.keys(response.data).length) {
-							this.posts.push(Object.assign(...this.posts, ...response.data));
+							this.posts.push(Object.assign({}, ...response.data));
+							this.loading = false;
 						}
 					} catch (error) {
-						console.log("get posts error", error);
+						this.loading = false;
 					}
 				}
 			}

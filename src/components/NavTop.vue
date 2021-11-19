@@ -1,12 +1,12 @@
 <template>
-	<div v-if="$route.name !== 'Login'" class="navbar">
-		<div class="navbar__menu">
-			<router-link class="navbar__menu__link" to="/">Home</router-link>
-			<router-link class="navbar__menu__link" to="/about">About</router-link>
-			<el-button plain @click="$router.push('/admin')">Admin</el-button>
-			<el-button v-if="loggedIn" @click="logedOut" plain>Logout</el-button>
-		</div>
-	</div>
+	<q-toolbar v-if="$route.name !== 'Login'" class="bg-primary text-white">
+		<q-btn flat @click="drawerToggle" round dense icon="menu"/>
+		<q-toolbar-title>{{ $route.name }}</q-toolbar-title>
+		<q-btn flat v-if="!loggedIn" @click="$router.push('/login')" label="Login"/>
+		<q-btn flat v-if="loggedIn" @click="logedOut" label="Logout"/>
+		<q-btn flat round dense @click="$router.push('/favorite')" icon="favorite"/>
+		<q-btn flat round dense icon="more_vert"/>
+	</q-toolbar>
 </template>
 
 <script>
@@ -21,6 +21,9 @@ export default {
 		async logedOut() {
 			await this.$store.dispatch('logedOut');
 			return this.$router.push('/');
+		},
+		drawerToggle() {
+			this.$emit('drawerToggle');
 		}
 	}
 }

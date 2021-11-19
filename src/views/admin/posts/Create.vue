@@ -1,21 +1,25 @@
 <template>
-	<div class="container">
-		<div class="col-login">
-			<div class="card" style="margin-top: 0">
-				<div class="form-control">
-					<label for="title">Title</label>
-					<input type="text" name="title" id="title" v-model="form.title">
-				</div>
-				<div class="form-control">
-					<label for="body">Description</label>
-					<input name="body" id="body" v-model="form.body">
-				</div>
+	<div class="q-pa-md" style="max-width: 400px;margin: auto;">
+		<q-form
+			@submit="handlerSubmit"
+			class="q-gutter-md"
+		>
+			<q-input
+				filled
+				v-model="form.title"
+				label="Title"
+			/>
 
-				<div style="margin-top: 30px">
-					<el-button plain @click="handlerSubmit" :loading="loading">Submit</el-button>
-				</div>
+			<q-input
+				filled
+				v-model="form.body"
+				label="Description"
+			/>
+
+			<div>
+				<q-btn label="Post" type="submit" color="primary"/>
 			</div>
-		</div>
+		</q-form>
 	</div>
 </template>
 
@@ -42,7 +46,7 @@ export default {
 				if (this.form.title) {
 					if (this.form.body) {
 						this.loading = false;
-						this.$store.dispatch('posts', {"title": this.form.title, "body": this.form.body});
+						this.$store.dispatch('posts', {id: 'user_posts_' + (this.$store.getters.getPost.length + 1), "title": this.form.title, "body": this.form.body});
 						this.$router.push('/admin')
 					} else {
 						this.loading = false;

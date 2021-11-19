@@ -1,8 +1,9 @@
 <template>
-	<div class="container">
-		<div v-if="posts.length" v-for="post in posts" class="col-posts">
-			<Card :title="post.title" :description="post.body"/>
+	<div class="row">
+		<div v-if="posts.length" v-for="post in posts" class="col-12">
+			<Card :id="post.id" :title="post.title" :description="post.body" :admin="true"/>
 		</div>
+
 		<div v-if="!posts.length">Belum memiliki postingan</div>
 	</div>
 

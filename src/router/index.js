@@ -9,33 +9,35 @@ const routes = [{
 	{
 		path: '/about',
 		name: 'About',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
+		component: () => import('../views/About.vue')
 	},
 	{
 		path: '/login',
 		name: 'Login',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import( /* webpackChunkName: "about" */ '../views/Login.vue'),
+		component: () => import('../views/Login.vue'),
 	},
 	{
 		path: '/admin',
-		name: 'Admin-Dashboard',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import( /* webpackChunkName: "about" */ '../views/admin/Index.vue'),
+		name: 'Dashboard',
+		component: () => import('../views/admin/Index.vue'),
 		meta: {auth: true}
-	},	
+	},
 	{
 		path: '/admin/post/create',
-		name: 'Admin-Post-Create',
-		component: () => import( /* webpackChunkName: "about" */ '../views/posts/Create.vue'),
+		name: 'Post Create',
+		component: () => import('../views/admin/posts/Create.vue'),
 		meta: {auth: true}
+	},
+	{
+		path: '/admin/post/edit/:id',
+		name: 'Post Edit',
+		component: () => import('../views/admin/posts/Edit.vue'),
+		meta: {auth: true}
+	},
+	{
+		path: '/:id',
+		name: 'Single',
+		component: () => import('../views/Single.vue')
 	}
 ]
 
