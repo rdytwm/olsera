@@ -79,6 +79,7 @@ export default createStore({
 		},
 		logedOut: ({commit}) => {
 			commit('setUser', []);
+			commit('updatePost', []);
 			commit('setLoggedIn', false);
 		},
 		posts: ({commit}, payload) => {
